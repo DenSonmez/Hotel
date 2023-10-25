@@ -2,10 +2,10 @@ version: '3.9'
 
 services:
   api:
-    image: denson@hotmail.dk/hotel:latest
+    image: denizsonmez/hotel:latest
     container_name: app
     environment:
-        CONNECTION_STR: jdbc:postgresql://db:5432/postgres
+        CONNECTION_STR: jdbc:postgresql://db:5432
         DB_USERNAME: postgres
         DB_PASSWORD: postgres
         DEPLOYED: true
