@@ -1,0 +1,77 @@
+// Hotel API
+
+GET {{url}}/appointments
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/appointments/3
+Authorization: Bearer {{token}}
+
+###
+
+POST {{url}}/appointments
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "appointmentDate": [
+    2023,11,5,11,0
+  ],
+  "reason": "dårlig knæ"
+}
+
+###
+
+PUT {{url}}/appointments/8
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "appointmentDate": [
+    2023,11,5,11,0
+  ],
+  "reason": "Stor Operation"
+}
+
+###
+
+DELETE {{url}}/appointments/8
+Authorization: Bearer {{token}}
+
+###
+
+// Room API
+
+GET {{url}}/patient
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/patient/2
+Authorization: Bearer {{token}}
+
+###
+
+POST {{url}}/patient/appointment/8
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Igor",
+  "species": "Dog",
+  "medicalHistory": "Ond i røven"
+}
+
+###
+
+PUT {{url}}/patient/8
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Igor",
+  "species": "Dog",
+  "medicalHistory": "Tændpine"
+}
+
