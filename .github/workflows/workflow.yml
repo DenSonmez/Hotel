@@ -36,5 +36,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: minbruger/hotel:latest
+          tags:  denizsonmez/hotel:latest
 
