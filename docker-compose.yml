@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   api:
-    image: denizsonmez/myrepository:latest
+    image: denizsonmez/hotel:latest
     container_name: app
     environment:
         CONNECTION_STR: jdbc:postgresql://db:5432
