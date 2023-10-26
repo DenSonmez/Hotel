@@ -2,8 +2,7 @@ version: '3.9'
 
 networks:
   database_network:
-    external:
-      name: database_network
+    external: true
 
 services:
   api:
@@ -18,7 +17,7 @@ services:
       TOKEN_EXPIRE_TIME: 1800000
       ISSUER: ds.com
     ports:
-      - "64.226.96.210:7070:7070"
+      - "7070:7070"
     networks:
       - database_network
 
