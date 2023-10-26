@@ -1,9 +1,5 @@
 version: '3.9'
 
-networks:
-  database_network:
-    external: true
-
 services:
   api:
     image: denizsonmez/hotel:latest
@@ -35,3 +31,8 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
+networks:
+  database_network:
+    name: database_network
+    internal: false
+    driver: bridge
