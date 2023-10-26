@@ -5,19 +5,20 @@ services:
     image: denizsonmez/hotel:latest
     container_name: app
     environment:
-      CONNECTION_STR: jdbc:postgresql://db:5432
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
-      DEPLOYED: true
-      SECRET_KEY: ABAn73oTCLEUVW3eX3UNMohoOlSzmel2Aa34eiVZ7lA=
-      TOKEN_EXPIRE_TIME: 1800000
-      ISSUER: ds.com
+      CONNECTION_STR: ${CONNECTION_STR}
+      DB_USERNAME: ${DB_PASSWORD}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DEPLOYED: ${DEPLOYED}
+      SECRET_KEY: ${SECRET_KEY}
+      TOKEN_EXPIRE_TIME: ${TOKEN_EXPIRE_TIME}
+      ISSUER: ${ISSUER}
     ports:
       - "7070:7070"
     networks:
       - database_network
 
   db:
+    # arm64v8/postgres:latest for aAc user with m1 or m2 processor
     image: postgres:15.3-alpine3.18
     container_name: db
     restart: unless-stopped
@@ -31,6 +32,7 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
+
 networks:
   database_network:
     name: database_network
