@@ -1,5 +1,10 @@
 version: '3.9'
 
+networks:
+  database_network:
+    external:
+      name: database_network
+
 services:
   api:
     image: denizsonmez/hotel:latest
@@ -12,8 +17,8 @@ services:
       SECRET_KEY: ABAn73oTCLEUVW3eX3UNMohoOlSzmel2Aa34eiVZ7lA=
       TOKEN_EXPIRE_TIME: 1800000
       ISSUER: ds.com
-   ports:
-    - "64.226.96.210:7070:7070"
+    ports:
+      - "64.226.96.210:7070:7070"
     networks:
       - database_network
 
@@ -28,12 +33,6 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - ./db-data:/var/lib/postgresql/data/
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql # init.sql is a file that is run when the container is created
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
-
-networks:
-  database_network:
-    name: database_network
-    internal: false
-    driver: bridge
