@@ -1,22 +1,11 @@
-version: '3.9'
+version: "3.9"
 
 services:
-  api:
+  backend:
     image: denizsonmez/hotel:latest
-    container_name: app
-    environment:
-      CONNECTION_STR: ${CONNECTION_STR}
-      DB_USERNAME: ${DB_PASSWORD}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DEPLOYED: ${DEPLOYED}
-      SECRET_KEY: ${SECRET_KEY}
-      TOKEN_EXPIRE_TIME: ${TOKEN_EXPIRE_TIME}
-      ISSUER: ${ISSUER}
     ports:
-      - "7070:7070"
-    networks:
-      - database_network
-
+      - 8080:7070
+    restart: always
   db:
     # arm64v8/postgres:latest for aAc user with m1 or m2 processor
     image: postgres:15.3-alpine3.18
@@ -32,6 +21,19 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
+  pgadmin: # https://turreta.com/blog/2020/07/31/docker-compose-yml-for-pgadmin-and-postgresql/
+    image: dpage/pgadmin4:7.5
+    container_name: pgadmin
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - database_network
+    environment:
+      PGADMIN_DEFAULT_EMAIL: denson@hotmail.dk
+      PGADMIN_DEFAULT_PASSWORD: 1234
 
 networks:
   database_network:
